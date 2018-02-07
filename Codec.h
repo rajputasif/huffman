@@ -16,7 +16,7 @@ public:
         return cur_->leaf;
     }
 
-    Byte getValue() { return cur_->value; }
+    int getValue() { return cur_->value; }
 
 private:
     Node *root_, *cur_;
@@ -31,12 +31,12 @@ public:
         }
     }
 
-    const std::vector<bool> &get(Byte byte) const {
+    const std::vector<bool> &get(int byte) const {
         return encoding_map_.at(byte);
     }
 
 private:
-    std::map<Byte, Code> encoding_map_;
+    std::map<int, Code> encoding_map_;
 };
 
 #endif

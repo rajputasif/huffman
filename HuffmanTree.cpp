@@ -10,7 +10,7 @@ struct PNodeComp {
 };
 
 
-HuffmanTree::HuffmanTree(const std::map<unsigned char, int> &freq) {
+HuffmanTree::HuffmanTree(const std::map<int, int> &freq) {
     build(freq);
 }
 
@@ -18,7 +18,7 @@ HuffmanTree::HuffmanTree(const std::map<unsigned char, int> &freq) {
 HuffmanTree::HuffmanTree(std::istream &is, int code_count) {
     std::vector<CodeInfo> code_infos;
     while (code_count-- > 0) {
-        Byte byte;
+        int byte;
         CodeLength length;
         is.read(reinterpret_cast<char *>(&byte), sizeof(byte));
         is.read(reinterpret_cast<char *>(&length), sizeof(length));
@@ -28,7 +28,7 @@ HuffmanTree::HuffmanTree(std::istream &is, int code_count) {
 }
 
 
-void HuffmanTree::build(const std::map<unsigned char, int> freq) {
+void HuffmanTree::build(const std::map<int, int> freq) {
     if (freq.size() == 1) {
         root_->l = new Node(freq.begin()->second, freq.begin()->first);
         return;
@@ -62,7 +62,7 @@ void HuffmanTree::rebuild(const std::vector<CodeInfo> code_infos) {
 }
 
 
-bool HuffmanTree::tryInsert(Node *node, int len, Byte value) {
+bool HuffmanTree::tryInsert(Node *node, int len, int value) {
     if (node->leaf)
         return false;
 

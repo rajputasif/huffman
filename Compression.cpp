@@ -92,9 +92,33 @@ void usage(const std::string &prog) {
     std::exit(2);
 }
 
+#ifndef MCLOCK_DEFINED
+#define MCLOCK_DEFINED
+	#include <chrono>
+	typedef std::chrono::high_resolution_clock Clock;
+	class mClock{
+	public:
+		Clock::time_point timeStart,timeEnd;
+		std::chrono::nanoseconds ns;
+
+		mClock(){
+			timeStart = Clock::now();
+			timeEnd = Clock::now();
+		};
+		void startClock(){ timeStart = Clock::now();	}
+		void endClock(){
+			timeEnd = Clock::now();
+			ns = std::chrono::duration_cast<std::chrono::nanoseconds>(timeStart - timeEnd);
+		}
+
+		double getClockValue(){ return -ns.count()/1e6;	}
+	};
+#endif
+
 
 int main(int argc, char *argv[]) {
     int i;
+    mClock clk;
     std::string src, dest;
     bool isDecompress = false;
     for (i = 1; i < argc; i++) {
@@ -103,8 +127,15 @@ int main(int argc, char *argv[]) {
         else if (dest == "") dest = argv[i];
         else usage(argv[0]);
     }
+    
+    clk.startClock();
+    
     if (dest == "") usage(argv[0]);
     if (isDecompress) decompress(src, dest);
     else compress(src, dest);
+    
+    clk.endClock();
+    std::cout<<clk.getClockValue()<<" MiliSeconds Taken"<<std::endl;
+    
     return 0;
 }

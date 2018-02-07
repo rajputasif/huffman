@@ -8,7 +8,7 @@
 typedef std::vector<bool> Code;
 typedef int16_t CodeLength;
 typedef uint8_t Byte;
-typedef std::pair<Byte, CodeLength> CodeInfo;
-typedef std::pair<Byte, Code> Encoding;
+typedef std::pair<int, CodeLength> CodeInfo;
+typedef std::pair<int, Code> Encoding;
 
 #endif

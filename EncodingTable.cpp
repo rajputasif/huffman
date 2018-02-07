@@ -21,7 +21,7 @@ EncodingTable::EncodingTable(std::vector<CodeInfo> &code_infos) {
 
     encodings_.push_back(make_pair(it->first, Code(it->second, false)));
     while (++it != code_infos.end()) {
-        Byte byte = it->first;
+        auto byte = it->first;
         CodeLength length = it->second;
         Code code = encodings_.rbegin()->second;
 
@@ -36,7 +36,7 @@ EncodingTable::EncodingTable(std::vector<CodeInfo> &code_infos) {
 std::string EncodingTable::toString() const {
     std::ostringstream os;
     for (const Encoding &encoding: encodings_) {
-        Byte byte = encoding.first;
+        auto byte = encoding.first;
         CodeLength length = static_cast<CodeLength>(encoding.second.size());
         os.write(reinterpret_cast<const char *>(&byte), sizeof(byte));
         os.write(reinterpret_cast<const char *>(&length), sizeof(length));

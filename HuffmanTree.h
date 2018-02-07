@@ -11,10 +11,10 @@
 struct Node {
     int weight;
     bool leaf;
-    unsigned char value;
+    int value;
     Node *l, *r;
 
-    Node(int weight, unsigned char value) :
+    Node(int weight, int value) :
         weight(weight), value(value), l(nullptr), r(nullptr), leaf(true) { }
 
     Node(int weight = 0, Node *l = nullptr, Node *r = nullptr) :
@@ -28,13 +28,13 @@ struct Node {
 class HuffmanTree {
 public:
 
-    HuffmanTree(const std::map<unsigned char, int> &freq);
+    HuffmanTree(const std::map<int, int> &freq);
 
     HuffmanTree(std::istream &is, int code_count);
 
     ~HuffmanTree();
 
-    bool tryInsert(Node *node, int len, Byte value);
+    bool tryInsert(Node *node, int len, int value);
 
     void generateCodeInfo(Node *node, CodeLength length, std::vector<CodeInfo> &code_infos) const;
 
@@ -42,7 +42,7 @@ public:
 
     EncodingTable getEncodingTable() const;
 
-    void build(const std::map<Byte, int> freq);
+    void build(const std::map<int, int> freq);
 
     Node *getRoot() { return root_; }
 
