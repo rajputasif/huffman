@@ -4,8 +4,8 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include "BWT/CHuffman_int/HuffmanTree.h"
-#include "BWT/CHuffman_int/Codec.h"
+#include "HuffmanTree.h"
+#include "Codec.h"
 
 //void Huffman_compress(const std::string &src, const std::string &dest) {
 //    std::ifstream is(src);
